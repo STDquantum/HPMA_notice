@@ -1,4 +1,4 @@
 # Game Notice Version Tracker
 
 ## Version History
-version:305
+version:305version:306
