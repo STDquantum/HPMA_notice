@@ -1,4 +1,4 @@
-name: Update Game Notice Version
+name: Update Game Notice Data
 
 on:
   schedule:
@@ -14,17 +14,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 获取最新版本
-      - name: Fetch version
-        id: fetch_version
+      # 获取接口数据
+      - name: Fetch notice data
+        id: fetch_data
         run: |
-          echo "Fetching version..."
+          echo "Fetching notice data..."
           RESPONSE=$(curl -s -H "Host: g92.update.netease.com" -H "User-Agent: Python-urllib/2.7" \
           "https://g92.update.netease.com/game_notice/notice_gray_cn")
 
           echo "Response: $RESPONSE"
 
-          # 提取 version: 后的数字
+          # 提取 version
           VERSION=$(echo "$RESPONSE" | grep -oP 'version:\K[0-9]+')
 
           if [ -z "$VERSION" ]; then
@@ -33,17 +33,24 @@ jobs:
           fi
 
           echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "$RESPONSE" > latest_response.txt
 
-      # 如果版本变化则追加到 README.md
-      - name: Append version to README.md if changed
+      # 判断是否变化，如果变化则追加到 README.md
+      - name: Append data to README.md if changed
         run: |
-          LAST_VERSION=$(grep -oP 'version:\K[0-9]+' README.md | tail -n 1 || echo "")
-          echo "Last version in README: $LAST_VERSION"
+          # 获取上一次记录的最后一个版本号
+          LAST_VERSION=$(grep '^### version:' README.md | tail -n 1 | grep -oP '[0-9]+$' || echo "")
+          echo "Last version: $LAST_VERSION"
           echo "New version: $VERSION"
 
           if [ "$VERSION" != "$LAST_VERSION" ]; then
-            echo "Version changed, appending to README.md..."
-            echo "version:$VERSION" >> README.md
+            echo "Version changed, appending full data to README.md..."
+            {
+              echo ""
+              echo "### version:$VERSION"
+              cat latest_response.txt
+              echo ""
+            } >> README.md
           else
             echo "Version unchanged. Skipping update."
             exit 0
