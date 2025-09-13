@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 获取接口数据
+      # 获取接口完整数据
       - name: Fetch notice data
         id: fetch_data
         run: |
@@ -33,12 +33,15 @@ jobs:
           fi
 
           echo "VERSION=$VERSION" >> $GITHUB_ENV
-          echo "$RESPONSE" > latest_response.txt
+          
+          # 将单换行替换为双换行，存入文件
+          echo "$RESPONSE" | sed 's/$/\n/' > raw_response.txt
+          sed ':a;N;$!ba;s/\n/\n\n/g' raw_response.txt > latest_response.txt
 
-      # 判断是否变化，如果变化则追加到 README.md
+      # 如果版本变化则追加到 README.md
       - name: Append data to README.md if changed
         run: |
-          # 获取上一次记录的最后一个版本号
+          # 获取最后一个记录的版本号
           LAST_VERSION=$(grep '^### version:' README.md | tail -n 1 | grep -oP '[0-9]+$' || echo "")
           echo "Last version: $LAST_VERSION"
           echo "New version: $VERSION"
