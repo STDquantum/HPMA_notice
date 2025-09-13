@@ -1,0 +1,59 @@
+name: Update Game Notice Version
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # 每天 00:00 UTC 运行（北京时间 08:00）
+  workflow_dispatch: # 手动触发
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 检出代码
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 获取最新版本
+      - name: Fetch version
+        id: fetch_version
+        run: |
+          echo "Fetching version..."
+          RESPONSE=$(curl -s -H "Host: g92.update.netease.com" -H "User-Agent: Python-urllib/2.7" \
+          "https://g92.update.netease.com/game_notice/notice_gray_cn")
+
+          echo "Response: $RESPONSE"
+
+          # 提取 version: 后的数字
+          VERSION=$(echo "$RESPONSE" | grep -oP 'version:\K[0-9]+')
+
+          if [ -z "$VERSION" ]; then
+            echo "No version found!"
+            exit 1
+          fi
+
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
+      # 如果版本变化则追加到 README.md
+      - name: Append version to README.md if changed
+        run: |
+          LAST_VERSION=$(grep -oP 'version:\K[0-9]+' README.md | tail -n 1 || echo "")
+          echo "Last version in README: $LAST_VERSION"
+          echo "New version: $VERSION"
+
+          if [ "$VERSION" != "$LAST_VERSION" ]; then
+            echo "Version changed, appending to README.md..."
+            echo "version:$VERSION" >> README.md
+          else
+            echo "Version unchanged. Skipping update."
+            exit 0
+          fi
+
+      # 提交更改
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "Append version $VERSION"
+          git push

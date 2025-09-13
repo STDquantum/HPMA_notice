@@ -1,2 +1,4 @@
-# HPMA_notice
-HPMA更新公告
+# Game Notice Version Tracker
+
+## Version History
+version:305
