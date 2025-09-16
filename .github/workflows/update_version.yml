@@ -6,7 +6,7 @@ on:
   workflow_dispatch: # 手动触发
 
 jobs:
-  update-version:
+  update-hash:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,41 +24,42 @@ jobs:
 
           echo "Response: $RESPONSE"
 
-          # 提取 version
-          VERSION=$(echo "$RESPONSE" | grep -oP 'version:\K[0-9]+')
-
-          if [ -z "$VERSION" ]; then
-            echo "No version found!"
+          if [ -z "$RESPONSE" ]; then
+            echo "Empty response!"
             exit 1
           fi
 
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
-          
+          # 计算返回内容的 SHA256 哈希
+          HASH=$(echo "$RESPONSE" | sha256sum | awk '{print $1}')
+          echo "HASH=$HASH" >> $GITHUB_ENV
+          echo "Current hash: $HASH"
+
           # 将单换行替换为双换行，存入文件
           echo "$RESPONSE" | sed 's/$/\n/' > raw_response.txt
           sed ':a;N;$!ba;s/\n/\n\n/g' raw_response.txt > latest_response.txt
 
-      # 如果版本变化则追加到 README.md
+      # 如果哈希不同则追加到 README.md
       - name: Append data to README.md if changed
         run: |
-          # 获取最后一个记录的版本号
-          LAST_VERSION=$(grep '^### version:' README.md | tail -n 1 | grep -oP '[0-9]+$' || echo "")
-          echo "Last version: $LAST_VERSION"
-          echo "New version: $VERSION"
+          # 从 README.md 中获取最后一个记录的哈希
+          LAST_HASH=$(grep '^### hash:' README.md | tail -n 1 | awk '{print $2}' || echo "")
+          echo "Last hash: $LAST_HASH"
+          echo "New hash: $HASH"
 
-          if [ "$VERSION" != "$LAST_VERSION" ]; then
-            echo "Version changed, appending full data to README.md..."
+          if [ "$HASH" != "$LAST_HASH" ]; then
+            echo "Hash changed, appending full data to README.md..."
             {
               echo ""
-              echo "### version:$VERSION"
+              echo "### hash: $HASH"
               cat latest_response.txt
               echo ""
             } >> README.md
           else
-            echo "Version unchanged. Skipping update."
+            echo "Hash unchanged. Skipping update."
             exit 0
           fi
 
+      # 提交更改
       - name: Commit changes
         run: |
           git config user.name "github-actions[bot]"
@@ -68,6 +69,6 @@ jobs:
             echo "No changes to commit."
           else
             git add README.md
-            git commit -m "Append version $VERSION"
+            git commit -m "Append data with hash $HASH"
             git push
           fi
