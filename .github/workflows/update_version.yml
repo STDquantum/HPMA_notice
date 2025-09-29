@@ -42,7 +42,7 @@ jobs:
       - name: Append data to README.md if changed
         run: |
           # 从 README.md 中获取最后一个记录的哈希
-          LAST_HASH=$(grep '^### hash:' README.md | tail -n 1 | awk '{print $2}' || echo "")
+          LAST_HASH=$(sed -n 's/^### hash: \(.*\)/\1/p' README.md | tail -n 1 || echo "")
           echo "Last hash: $LAST_HASH"
           echo "New hash: $HASH"
 
