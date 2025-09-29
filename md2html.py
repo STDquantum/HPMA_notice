@@ -232,29 +232,115 @@ def split_by_hash_blocks(md_text):
         blocks.append({"hash": h, "body": body})
     return blocks[1:][::-1]
 
+import bs4
+
+# ...existing code...
+
+def build_toc(html_body):
+    soup = bs4.BeautifulSoup(html_body, "html.parser")
+    toc = []
+    for tag in soup.find_all(['h1', 'h2', 'h3']):
+        title = tag.get_text(strip=True)
+        if not title:
+            continue
+        anchor = tag.get('id')
+        if not anchor:
+            anchor = f"toc-{len(toc)}"
+            tag['id'] = anchor
+        toc.append({
+            "level": int(tag.name[1]),
+            "title": title,
+            "anchor": anchor
+        })
+    # 生成 TOC HTML（h2及以上为主项，h3/h4为子项，默认折叠）
+    toc_html = ['<nav class="toc"><strong>目录</strong><ul>']
+    last_level = 1
+    stack = [toc_html]
+    for i, item in enumerate(toc):
+        lvl = item["level"]
+        # 只显示h2及以上，h3/h4作为子ul
+        if lvl == 1 or lvl == 2:
+            # 关闭之前的子ul
+            while last_level > 2:
+                stack[-1].append("</ul>")
+                stack.pop()
+                last_level -= 1
+            # 新的h2
+            stack[0].append(
+                f'<li class="toc-l{lvl}"><a href="#{item["anchor"]}" data-toc-index="{i}" class="toc-h2">{item["title"]}</a>'
+            )
+            # 检查下一个是不是h3/h4
+            if i + 1 < len(toc) and toc[i + 1]["level"] > 2:
+                stack[0].append('<ul class="toc-sub" style="display:none;">')
+                stack.append(stack[0])
+                last_level = 3
+        elif lvl == 3 or lvl == 4:
+            # 只在有父ul时添加
+            stack[-1].append(
+                f'<li class="toc-l{lvl}"><a href="#{item["anchor"]}" data-toc-index="{i}" class="toc-h3">{item["title"]}</a></li>'
+            )
+            # 检查下一个是不是更高层级
+            if i + 1 >= len(toc) or toc[i + 1]["level"] <= 2:
+                # 关闭子ul
+                stack[-1].append("</ul>")
+                stack.pop()
+                last_level = 2
+    # 关闭所有未闭合ul
+    while last_level > 1:
+        stack[0].append("</ul>")
+        last_level -= 1
+    toc_html.append("</ul></nav>")
+    return str(soup), ''.join(toc_html)
+
+# ...existing code...
+
 def build_html(md_text, title="Converted README"):
     blocks = split_by_hash_blocks(md_text)
     body_html_parts = []
     for blk in blocks:
         h = blk["hash"]
         b = blk["body"]
-        # 1️⃣ 先全局替换 red 标签
         b = red_replace(b)
-
         if h is None:
             body_html_parts.append(f'<section class="no-hash">{render_paragraphs(b)}</section>')
             continue
-        
-        # 2️⃣ 再解析标签
         tags = find_tag_blocks(b)
         content_html = render_tag_sequence(tags)
         body_html_parts.append(f'<section id="{escape(h)}" class="hash-block"><h1>hash: {escape(h)}</h1>{content_html}</section>')
-        
     body_html = '\n'.join(body_html_parts)
-    # 基本 CSS
+    body_html_with_ids, toc_html = build_toc(body_html)
+    
     css = '''
-body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; line-height:1.6; padding:20px; color:#222; background:#fff; }
-main { max-width: 700px; margin: 0 auto; padding: 0 20px; }
+body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; line-height:1.6; color:#222; background:#fff; margin:0; }
+.toc {
+  position:fixed; top:40px; left:32px; width:220px; max-height:80vh; overflow:auto;
+  background:#f8f8f8; border:1px solid #eee; border-radius:8px; padding:18px 18px 18px 22px;
+  font-size:1em; z-index:10; box-shadow:0 2px 12px rgba(0,0,0,0.06);
+  transition:opacity 0.2s;
+}
+.toc strong { font-size:1.1em; }
+.toc ul { list-style:none; margin:0; padding-left:0.5em; }
+.toc li { margin:4px 0; }
+.toc-l2 { margin-left:0; }
+.toc-l3 { margin-left:1em; }
+.toc-l4 { margin-left:2em; }
+.toc a { color:#333; text-decoration:none; transition:color 0.2s; cursor:pointer; }
+.toc a.active, .toc a:hover { color:#1976d2; font-weight:bold; }
+.toc-sub { display:none; }
+.toc li.expanded > .toc-sub { display:block !important; }
+.toc li > .toc-h2::after { content: " ▶"; font-size:0.9em; color:#aaa; }
+.toc li.expanded > .toc-h2::after { content: " ▼"; color:#1976d2; }
+
+main {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+  background: none;
+}
+
 h1, h2, h3 { text-align: center; }
 h1 { border-bottom:2px solid #ddd; padding-bottom:6px; }
 h2 { color:#2c3e50; margin-top:29px; margin-bottom:5px; }
@@ -272,11 +358,64 @@ p { margin:8px 0; white-space:normal; }
 .hash-block { margin:28px 0; padding:10px 12px; border-radius:8px; box-shadow: 0 1px 0 rgba(0,0,0,0.03); }
 .no-hash { margin:6px 0; }
 .error { color:#900; background:#fee; padding:8px; border-radius:6px; }
-@media (max-width:800px){
-  .banner-item { flex:1 1 100%; }
-  .cardT { flex-direction:column; align-items:flex-start; }
-  .cardT .card-img img { max-width:100%; }
+
+@media (max-width:1100px){
+  .toc { display:none !important; }
 }
+'''
+
+    js = '''
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // TOC 展开/收起
+  document.querySelectorAll('.toc .toc-h2').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      var li = link.parentElement;
+      if (li.classList.contains('expanded')) {
+        li.classList.remove('expanded');
+      } else {
+        // 只展开当前，收起其他
+        document.querySelectorAll('.toc li.expanded').forEach(function(other) {
+          other.classList.remove('expanded');
+        });
+        li.classList.add('expanded');
+      }
+      e.preventDefault();
+    });
+  });
+  // 滚动时自动展开当前h2
+  const headings = Array.from(document.querySelectorAll("h1[id],h2[id],h3[id],h4[id]"));
+  const tocLinks = Array.from(document.querySelectorAll(".toc a"));
+  function onScroll() {
+    let cur = headings[0];
+    for (const h of headings) {
+      if (h.getBoundingClientRect().top - 80 < 0) cur = h;
+      else break;
+    }
+    tocLinks.forEach(a => a.classList.remove("active"));
+    const active = document.querySelector('.toc a[href="#'+cur.id+'"]');
+    if (active) active.classList.add("active");
+    // 自动展开当前h2
+    if (active && active.classList.contains('toc-h2')) {
+      document.querySelectorAll('.toc li.expanded').forEach(function(other) {
+        other.classList.remove('expanded');
+      });
+      active.parentElement.classList.add('expanded');
+    } else if (active) {
+      // 如果是h3/h4，展开其父h2
+      var parentLi = active.closest('ul').parentElement;
+      if (parentLi && parentLi.classList.contains('toc-l2')) {
+        document.querySelectorAll('.toc li.expanded').forEach(function(other) {
+          other.classList.remove('expanded');
+        });
+        parentLi.classList.add('expanded');
+      }
+    }
+  }
+  window.addEventListener("scroll", onScroll, {passive:true});
+  onScroll();
+});
+</script>
 '''
     html_doc = f'''<!doctype html>
 <html lang="zh">
@@ -287,14 +426,17 @@ p { margin:8px 0; white-space:normal; }
   <style>{css}</style>
 </head>
 <body>
+  {toc_html}
   <main>
     <h0 style="display:none;">{escape(title)}</h0>
-    {body_html}
+    {body_html_with_ids}
   </main>
+  {js}
 </body>
 </html>
 '''
     return html_doc
+
 
 def main():
     if not INPUT.exists():
