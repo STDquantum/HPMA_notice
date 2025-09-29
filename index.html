@@ -7,7 +7,7 @@
   <style>
 body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; line-height:1.6; color:#222; background:#fff; margin:0; }
 .toc {
-  position:fixed; top:40px; left:32px; width:220px; max-height:80vh; overflow:auto;
+  position:fixed; top:40px; left:32px; width:260px; max-height:80vh; overflow:auto;
   background:#f8f8f8; border:1px solid #eee; border-radius:8px; padding:18px 18px 18px 22px;
   font-size:1em; z-index:10; box-shadow:0 2px 12px rgba(0,0,0,0.06);
   transition:opacity 0.2s;
@@ -15,15 +15,16 @@ body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neu
 .toc strong { font-size:1.1em; }
 .toc ul { list-style:none; margin:0; padding-left:0.5em; }
 .toc li { margin:4px 0; }
-.toc-l2 { margin-left:0; }
-.toc-l3 { margin-left:1em; }
-.toc-l4 { margin-left:2em; }
+.toc-l1 { margin-left:0em!important; }
+.toc-l2 { margin-left:0.4em!important; }
+.toc-l3 { margin-left:0.8em!important; }
+.toc-l4 { margin-left:1.2em!important; }
 .toc a { color:#333; text-decoration:none; transition:color 0.2s; cursor:pointer; }
 .toc a.active, .toc a:hover { color:#1976d2; font-weight:bold; }
 .toc-sub { display:none; }
 .toc li.expanded > .toc-sub { display:block !important; }
-.toc li > .toc-h2::after { content: " ▶"; font-size:0.9em; color:#aaa; }
-.toc li.expanded > .toc-h2::after { content: " ▼"; color:#1976d2; }
+.toc li > .toc-h1::after { content: " ▶"; font-size:0.9em; color:#aaa; }
+.toc li.expanded > .toc-h1::after { content: " ▼"; color:#1976d2; }
 
 main {
   max-width: 700px;
@@ -59,10 +60,10 @@ p { margin:8px 0; white-space:normal; }
 </style>
 </head>
 <body>
-  <nav class="toc"><strong>目录</strong><ul><li class="toc-l1"><a href="#toc-0" data-toc-index="0" class="toc-h2">hash: 507343d</a><li class="toc-l2"><a href="#toc-1" data-toc-index="1" class="toc-h2">9月25日更新</a><li class="toc-l2"><a href="#toc-2" data-toc-index="2" class="toc-h2">热门活动</a><li class="toc-l2"><a href="#toc-3" data-toc-index="3" class="toc-h2">停服维护公告</a><li class="toc-l2"><a href="#toc-4" data-toc-index="4" class="toc-h2">重要更新</a><ul class="toc-sub" style="display:none;"><li class="toc-l3"><a href="#toc-5" data-toc-index="5" class="toc-h3">“幸运轮盘”全新开启！</a></li><li class="toc-l3"><a href="#toc-6" data-toc-index="6" class="toc-h3">“S15占卜赛季·于群星之间”持续更新！</a></li><li class="toc-l3"><a href="#toc-7" data-toc-index="7" class="toc-h3">“日月盛典”活动精彩开启！</a></li><li class="toc-l3"><a href="#toc-8" data-toc-index="8" class="toc-h3">妆容配饰图鉴全新上线！</a></li><li class="toc-l3"><a href="#toc-9" data-toc-index="9" class="toc-h3">“派对觅宝”活动开启</a></li><li class="toc-l3"><a href="#toc-10" data-toc-index="10" class="toc-h3">“复制成双”活动开启！</a></li><li class="toc-l3"><a href="#toc-11" data-toc-index="11" class="toc-h3">“月语星愿·梳妆魔盒”全新上线！</a></li><li class="toc-l3"><a href="#toc-12" data-toc-index="12" class="toc-h3">“咔嚓、砰！”玩法限时开启</a></li><li class="toc-l3"><a href="#toc-13" data-toc-index="13" class="toc-h3">2025年度卡牌回响设计大赛即将召开！</a></li><li class="toc-l3"><a href="#toc-14" data-toc-index="14" class="toc-h3">10月新学院礼盒上架</a></li><li class="toc-l3"><a href="#toc-15" data-toc-index="15" class="toc-h3">“禁林觅宝”活动开启！</a></li><li class="toc-l3"><a href="#toc-16" data-toc-index="16" class="toc-h3">“林中蹊径”挑战区域更新</a></li><li class="toc-l3"><a href="#toc-17" data-toc-index="17" class="toc-h3">“学院杯”魁地奇项目即将开赛！</a></li><li class="toc-l3"><a href="#toc-18" data-toc-index="18" class="toc-h3">“烹饪学”季节限定菜品追加！</a></li><li class="toc-l3"><a href="#toc-19" data-toc-index="19" class="toc-h3">"巫师空间设计大赛"活动开启!</a></li><li class="toc-l3"><a href="#toc-20" data-toc-index="20" class="toc-h3">“段位保护”活动开启！</a></li><li class="toc-l3"><a href="#toc-21" data-toc-index="21" class="toc-h3">赛季预告·徘徊夜的幽语</a></li><li class="toc-l3"><a href="#toc-22" data-toc-index="22" class="toc-h3">“周末福利”活动开启！</a></li></ul><li class="toc-l2"><a href="#toc-23" data-toc-index="23" class="toc-h2">体验优化</a><li class="toc-l2"><a href="#toc-24" data-toc-index="24" class="toc-h2">问题修正</a><li class="toc-l1"><a href="#toc-25" data-toc-index="25" class="toc-h2">hash: a977b69</a><li class="toc-l2"><a href="#toc-26" data-toc-index="26" class="toc-h2">热门活动</a><li class="toc-l2"><a href="#toc-27" data-toc-index="27" class="toc-h2">停服维护公告</a><li class="toc-l2"><a href="#toc-28" data-toc-index="28" class="toc-h2">重要更新</a><ul class="toc-sub" style="display:none;"><li class="toc-l3"><a href="#toc-29" data-toc-index="29" class="toc-h3">“幸运轮盘”全新开启！</a></li><li class="toc-l3"><a href="#toc-30" data-toc-index="30" class="toc-h3">“S15占卜赛季·于群星之间”持续更新！</a></li><li class="toc-l3"><a href="#toc-31" data-toc-index="31" class="toc-h3">“日月盛典”活动精彩开启！</a></li><li class="toc-l3"><a href="#toc-32" data-toc-index="32" class="toc-h3">妆容配饰图鉴全新上线！</a></li><li class="toc-l3"><a href="#toc-33" data-toc-index="33" class="toc-h3">“派对觅宝”活动开启</a></li><li class="toc-l3"><a href="#toc-34" data-toc-index="34" class="toc-h3">“复制成双”活动开启！</a></li><li class="toc-l3"><a href="#toc-35" data-toc-index="35" class="toc-h3">“月语星愿·梳妆魔盒”全新上线！</a></li><li class="toc-l3"><a href="#toc-36" data-toc-index="36" class="toc-h3">“咔嚓、砰！”玩法限时开启</a></li><li class="toc-l3"><a href="#toc-37" data-toc-index="37" class="toc-h3">2025年度卡牌回响设计大赛即将召开！</a></li><li class="toc-l3"><a href="#toc-38" data-toc-index="38" class="toc-h3">10月新学院礼盒上架</a></li><li class="toc-l3"><a href="#toc-39" data-toc-index="39" class="toc-h3">“禁林觅宝”活动开启！</a></li><li class="toc-l3"><a href="#toc-40" data-toc-index="40" class="toc-h3">“林中蹊径”挑战区域更新</a></li><li class="toc-l3"><a href="#toc-41" data-toc-index="41" class="toc-h3">“学院杯”魁地奇项目即将开赛！</a></li><li class="toc-l3"><a href="#toc-42" data-toc-index="42" class="toc-h3">“烹饪学”季节限定菜品追加！</a></li><li class="toc-l3"><a href="#toc-43" data-toc-index="43" class="toc-h3">"巫师空间设计大赛"活动开启!</a></li><li class="toc-l3"><a href="#toc-44" data-toc-index="44" class="toc-h3">“段位保护”活动开启！</a></li><li class="toc-l3"><a href="#toc-45" data-toc-index="45" class="toc-h3">赛季预告·徘徊夜的幽语</a></li><li class="toc-l3"><a href="#toc-46" data-toc-index="46" class="toc-h3">“周末福利”活动开启！</a></li></ul><li class="toc-l2"><a href="#toc-47" data-toc-index="47" class="toc-h2">体验优化</a><li class="toc-l2"><a href="#toc-48" data-toc-index="48" class="toc-h2">问题修正</a><li class="toc-l1"><a href="#toc-49" data-toc-index="49" class="toc-h2">hash: 374b441</a><li class="toc-l2"><a href="#toc-50" data-toc-index="50" class="toc-h2">热门活动</a><li class="toc-l2"><a href="#toc-51" data-toc-index="51" class="toc-h2">停服维护公告</a><li class="toc-l2"><a href="#toc-52" data-toc-index="52" class="toc-h2">重要更新</a><ul class="toc-sub" style="display:none;"><li class="toc-l3"><a href="#toc-53" data-toc-index="53" class="toc-h3">“福灵随行”赛季限定卡池开启！</a></li><li class="toc-l3"><a href="#toc-54" data-toc-index="54" class="toc-h3">全新回响“塞德里克·迪戈里”上线！</a></li><li class="toc-l3"><a href="#toc-55" data-toc-index="55" class="toc-h3">魔咒试炼开启！</a></li><li class="toc-l3"><a href="#toc-56" data-toc-index="56" class="toc-h3">“S15占卜赛季·于群星之间”持续更新！</a></li><li class="toc-l3"><a href="#toc-57" data-toc-index="57" class="toc-h3">“回响重塑时”活动开启</a></li><li class="toc-l3"><a href="#toc-58" data-toc-index="58" class="toc-h3">“巫师研究·烹饪学”更新！</a></li><li class="toc-l3"><a href="#toc-59" data-toc-index="59" class="toc-h3">“巫师研究·草药学”更新！</a></li><li class="toc-l3"><a href="#toc-60" data-toc-index="60" class="toc-h3">“勇探魔法部”禁林限时挑战开启无尽模式！</a></li><li class="toc-l3"><a href="#toc-61" data-toc-index="61" class="toc-h3">可染色发型新增！</a></li><li class="toc-l3"><a href="#toc-62" data-toc-index="62" class="toc-h3">“学院杯”麻瓜研究课项目即将开赛！</a></li><li class="toc-l3"><a href="#toc-63" data-toc-index="63" class="toc-h3">“林中蹊径”挑战区域更新</a></li><li class="toc-l3"><a href="#toc-64" data-toc-index="64" class="toc-h3">“周末福利”活动开启！</a></li><li class="toc-l3"><a href="#toc-65" data-toc-index="65" class="toc-h3">赛季成就调整</a></li><li class="toc-l3"><a href="#toc-66" data-toc-index="66" class="toc-h3">停服维护时间通告</a></li></ul><li class="toc-l2"><a href="#toc-67" data-toc-index="67" class="toc-h2">体验优化</a><li class="toc-l2"><a href="#toc-68" data-toc-index="68" class="toc-h2">问题修正</a><li class="toc-l1"><a href="#toc-69" data-toc-index="69" class="toc-h2">hash: 13caf70</a><li class="toc-l2"><a href="#toc-70" data-toc-index="70" class="toc-h2">热门活动</a><li class="toc-l2"><a href="#toc-71" data-toc-index="71" class="toc-h2">停服维护公告</a><li class="toc-l2"><a href="#toc-72" data-toc-index="72" class="toc-h2">重要更新</a><ul class="toc-sub" style="display:none;"><li class="toc-l3"><a href="#toc-73" data-toc-index="73" class="toc-h3">“幸运轮盘”全新开启！</a></li><li class="toc-l3"><a href="#toc-74" data-toc-index="74" class="toc-h3">“S15占卜赛季·于群星之间”持续更新！</a></li><li class="toc-l3"><a href="#toc-75" data-toc-index="75" class="toc-h3">神秘事务司·预言厅开启！</a></li><li class="toc-l3"><a href="#toc-76" data-toc-index="76" class="toc-h3">“勇探魔法部”活动开启！</a></li><li class="toc-l3"><a href="#toc-77" data-toc-index="77" class="toc-h3">烟火缤纷·四周年流星烟花秀即将开启！</a></li><li class="toc-l3"><a href="#toc-78" data-toc-index="78" class="toc-h3">“学院杯”舞会项目即将开赛！</a></li><li class="toc-l3"><a href="#toc-79" data-toc-index="79" class="toc-h3">“魔法绘画”活动即将开启</a></li><li class="toc-l3"><a href="#toc-80" data-toc-index="80" class="toc-h3">“星月玲珑语”礼包上架热销！</a></li><li class="toc-l3"><a href="#toc-81" data-toc-index="81" class="toc-h3">“全自动魔法牌”平衡性调整</a></li><li class="toc-l3"><a href="#toc-82" data-toc-index="82" class="toc-h3">“禁林探险家”活动开启</a></li><li class="toc-l3"><a href="#toc-83" data-toc-index="83" class="toc-h3">“林中蹊径”挑战区域更新</a></li><li class="toc-l3"><a href="#toc-84" data-toc-index="84" class="toc-h3">“周末福利”活动开启！</a></li><li class="toc-l3"><a href="#toc-85" data-toc-index="85" class="toc-h3">成就调整</a></li></ul><li class="toc-l2"><a href="#toc-86" data-toc-index="86" class="toc-h2">体验优化</a><li class="toc-l2"><a href="#toc-87" data-toc-index="87" class="toc-h2">问题修正</a></ul></ul></nav>
+  <nav class="toc"><strong>目录</strong><ul><li class="toc-l1"><a href="#toc-0" class="toc-h1">Hash: 507343d</a><ul class="toc-sub"><li class="toc-l2"><a href="#toc-1" class="toc-h2">9月25日更新</a></li><li class="toc-l2"><a href="#toc-2" class="toc-h2">热门活动</a></li><li class="toc-l2"><a href="#toc-3" class="toc-h2">停服维护公告</a></li><li class="toc-l2"><a href="#toc-4" class="toc-h2">重要更新</a></li><li class="toc-l3"><a href="#toc-5" class="toc-h3">“幸运轮盘”全新开启！</a></li><li class="toc-l3"><a href="#toc-6" class="toc-h3">“S15占卜赛季·于群星之间”持续更新！</a></li><li class="toc-l3"><a href="#toc-7" class="toc-h3">“日月盛典”活动精彩开启！</a></li><li class="toc-l3"><a href="#toc-8" class="toc-h3">妆容配饰图鉴全新上线！</a></li><li class="toc-l3"><a href="#toc-9" class="toc-h3">“派对觅宝”活动开启</a></li><li class="toc-l3"><a href="#toc-10" class="toc-h3">“复制成双”活动开启！</a></li><li class="toc-l3"><a href="#toc-11" class="toc-h3">“月语星愿·梳妆魔盒”全新上线！</a></li><li class="toc-l3"><a href="#toc-12" class="toc-h3">“咔嚓、砰！”玩法限时开启</a></li><li class="toc-l3"><a href="#toc-13" class="toc-h3">2025年度卡牌回响设计大赛即将召开！</a></li><li class="toc-l3"><a href="#toc-14" class="toc-h3">10月新学院礼盒上架</a></li><li class="toc-l3"><a href="#toc-15" class="toc-h3">“禁林觅宝”活动开启！</a></li><li class="toc-l3"><a href="#toc-16" class="toc-h3">“林中蹊径”挑战区域更新</a></li><li class="toc-l3"><a href="#toc-17" class="toc-h3">“学院杯”魁地奇项目即将开赛！</a></li><li class="toc-l3"><a href="#toc-18" class="toc-h3">“烹饪学”季节限定菜品追加！</a></li><li class="toc-l3"><a href="#toc-19" class="toc-h3">"巫师空间设计大赛"活动开启!</a></li><li class="toc-l3"><a href="#toc-20" class="toc-h3">“段位保护”活动开启！</a></li><li class="toc-l3"><a href="#toc-21" class="toc-h3">赛季预告·徘徊夜的幽语</a></li><li class="toc-l3"><a href="#toc-22" class="toc-h3">“周末福利”活动开启！</a></li><li class="toc-l2"><a href="#toc-23" class="toc-h2">体验优化</a></li><li class="toc-l2"><a href="#toc-24" class="toc-h2">问题修正</a></li></ul></li><li class="toc-l1"><a href="#toc-25" class="toc-h1">Hash: a977b69</a><ul class="toc-sub"><li class="toc-l2"><a href="#toc-26" class="toc-h2">热门活动</a></li><li class="toc-l2"><a href="#toc-27" class="toc-h2">停服维护公告</a></li><li class="toc-l2"><a href="#toc-28" class="toc-h2">重要更新</a></li><li class="toc-l3"><a href="#toc-29" class="toc-h3">“幸运轮盘”全新开启！</a></li><li class="toc-l3"><a href="#toc-30" class="toc-h3">“S15占卜赛季·于群星之间”持续更新！</a></li><li class="toc-l3"><a href="#toc-31" class="toc-h3">“日月盛典”活动精彩开启！</a></li><li class="toc-l3"><a href="#toc-32" class="toc-h3">妆容配饰图鉴全新上线！</a></li><li class="toc-l3"><a href="#toc-33" class="toc-h3">“派对觅宝”活动开启</a></li><li class="toc-l3"><a href="#toc-34" class="toc-h3">“复制成双”活动开启！</a></li><li class="toc-l3"><a href="#toc-35" class="toc-h3">“月语星愿·梳妆魔盒”全新上线！</a></li><li class="toc-l3"><a href="#toc-36" class="toc-h3">“咔嚓、砰！”玩法限时开启</a></li><li class="toc-l3"><a href="#toc-37" class="toc-h3">2025年度卡牌回响设计大赛即将召开！</a></li><li class="toc-l3"><a href="#toc-38" class="toc-h3">10月新学院礼盒上架</a></li><li class="toc-l3"><a href="#toc-39" class="toc-h3">“禁林觅宝”活动开启！</a></li><li class="toc-l3"><a href="#toc-40" class="toc-h3">“林中蹊径”挑战区域更新</a></li><li class="toc-l3"><a href="#toc-41" class="toc-h3">“学院杯”魁地奇项目即将开赛！</a></li><li class="toc-l3"><a href="#toc-42" class="toc-h3">“烹饪学”季节限定菜品追加！</a></li><li class="toc-l3"><a href="#toc-43" class="toc-h3">"巫师空间设计大赛"活动开启!</a></li><li class="toc-l3"><a href="#toc-44" class="toc-h3">“段位保护”活动开启！</a></li><li class="toc-l3"><a href="#toc-45" class="toc-h3">赛季预告·徘徊夜的幽语</a></li><li class="toc-l3"><a href="#toc-46" class="toc-h3">“周末福利”活动开启！</a></li><li class="toc-l2"><a href="#toc-47" class="toc-h2">体验优化</a></li><li class="toc-l2"><a href="#toc-48" class="toc-h2">问题修正</a></li></ul></li><li class="toc-l1"><a href="#toc-49" class="toc-h1">Hash: 374b441</a><ul class="toc-sub"><li class="toc-l2"><a href="#toc-50" class="toc-h2">热门活动</a></li><li class="toc-l2"><a href="#toc-51" class="toc-h2">停服维护公告</a></li><li class="toc-l2"><a href="#toc-52" class="toc-h2">重要更新</a></li><li class="toc-l3"><a href="#toc-53" class="toc-h3">“福灵随行”赛季限定卡池开启！</a></li><li class="toc-l3"><a href="#toc-54" class="toc-h3">全新回响“塞德里克·迪戈里”上线！</a></li><li class="toc-l3"><a href="#toc-55" class="toc-h3">魔咒试炼开启！</a></li><li class="toc-l3"><a href="#toc-56" class="toc-h3">“S15占卜赛季·于群星之间”持续更新！</a></li><li class="toc-l3"><a href="#toc-57" class="toc-h3">“回响重塑时”活动开启</a></li><li class="toc-l3"><a href="#toc-58" class="toc-h3">“巫师研究·烹饪学”更新！</a></li><li class="toc-l3"><a href="#toc-59" class="toc-h3">“巫师研究·草药学”更新！</a></li><li class="toc-l3"><a href="#toc-60" class="toc-h3">“勇探魔法部”禁林限时挑战开启无尽模式！</a></li><li class="toc-l3"><a href="#toc-61" class="toc-h3">可染色发型新增！</a></li><li class="toc-l3"><a href="#toc-62" class="toc-h3">“学院杯”麻瓜研究课项目即将开赛！</a></li><li class="toc-l3"><a href="#toc-63" class="toc-h3">“林中蹊径”挑战区域更新</a></li><li class="toc-l3"><a href="#toc-64" class="toc-h3">“周末福利”活动开启！</a></li><li class="toc-l3"><a href="#toc-65" class="toc-h3">赛季成就调整</a></li><li class="toc-l3"><a href="#toc-66" class="toc-h3">停服维护时间通告</a></li><li class="toc-l2"><a href="#toc-67" class="toc-h2">体验优化</a></li><li class="toc-l2"><a href="#toc-68" class="toc-h2">问题修正</a></li></ul></li><li class="toc-l1"><a href="#toc-69" class="toc-h1">Hash: 13caf70</a><ul class="toc-sub"><li class="toc-l2"><a href="#toc-70" class="toc-h2">热门活动</a></li><li class="toc-l2"><a href="#toc-71" class="toc-h2">停服维护公告</a></li><li class="toc-l2"><a href="#toc-72" class="toc-h2">重要更新</a></li><li class="toc-l3"><a href="#toc-73" class="toc-h3">“幸运轮盘”全新开启！</a></li><li class="toc-l3"><a href="#toc-74" class="toc-h3">“S15占卜赛季·于群星之间”持续更新！</a></li><li class="toc-l3"><a href="#toc-75" class="toc-h3">神秘事务司·预言厅开启！</a></li><li class="toc-l3"><a href="#toc-76" class="toc-h3">“勇探魔法部”活动开启！</a></li><li class="toc-l3"><a href="#toc-77" class="toc-h3">烟火缤纷·四周年流星烟花秀即将开启！</a></li><li class="toc-l3"><a href="#toc-78" class="toc-h3">“学院杯”舞会项目即将开赛！</a></li><li class="toc-l3"><a href="#toc-79" class="toc-h3">“魔法绘画”活动即将开启</a></li><li class="toc-l3"><a href="#toc-80" class="toc-h3">“星月玲珑语”礼包上架热销！</a></li><li class="toc-l3"><a href="#toc-81" class="toc-h3">“全自动魔法牌”平衡性调整</a></li><li class="toc-l3"><a href="#toc-82" class="toc-h3">“禁林探险家”活动开启</a></li><li class="toc-l3"><a href="#toc-83" class="toc-h3">“林中蹊径”挑战区域更新</a></li><li class="toc-l3"><a href="#toc-84" class="toc-h3">“周末福利”活动开启！</a></li><li class="toc-l3"><a href="#toc-85" class="toc-h3">成就调整</a></li><li class="toc-l2"><a href="#toc-86" class="toc-h2">体验优化</a></li><li class="toc-l2"><a href="#toc-87" class="toc-h2">问题修正</a></li></ul></li></ul></nav>
   <main>
     <h0 style="display:none;">README.md</h0>
-    <section class="hash-block" id="507343d"><h1 id="toc-0">hash: 507343d</h1><p>version:306</p>
+    <section class="hash-block" id="507343d"><h1 id="toc-0">Hash: 507343d</h1><p>version:306</p>
 <p>time:2020-2030</p>
 <div class="smain"><h2 id="toc-1">9月25日更新</h2></div>
 <p>修复了男生脸型“基础脸型-14”、“基础脸型-37”眉毛变化的问题。</p>
@@ -248,7 +249,7 @@ p { margin:8px 0; white-space:normal; }
 <p>1.修复了好友界面人物大小过大问题。</p>
 <p>2.修复了回忆图鉴“设定集”中，勾选不使用的设定页依然会在游戏加载时刷新出来的问题。</p>
 <p>3.修复了“基础脸型-37”在做动作的时候会出现异常的问题。</p></section>
-<section class="hash-block" id="a977b69"><h1 id="toc-25">hash: a977b69</h1><p>version:306</p>
+<section class="hash-block" id="a977b69"><h1 id="toc-25">Hash: a977b69</h1><p>version:306</p>
 <p>time:2020-2030</p>
 <div class="smain"><h2 id="toc-26">热门活动</h2></div>
 <div class="bannerT2">
@@ -431,7 +432,7 @@ p { margin:8px 0; white-space:normal; }
 <p>1.修复了好友界面人物大小过大问题。</p>
 <p>2.修复了回忆图鉴“设定集”中，勾选不使用的设定页依然会在游戏加载时刷新出来的问题。</p>
 <p>3.修复了“基础脸型-37”在做动作的时候会出现异常的问题。</p></section>
-<section class="hash-block" id="374b441"><h1 id="toc-49">hash: 374b441</h1><p>version:306</p>
+<section class="hash-block" id="374b441"><h1 id="toc-49">Hash: 374b441</h1><p>version:306</p>
 <p>time:2020-2030</p>
 <div class="smain"><h2 id="toc-50">热门活动</h2></div>
 <div class="bannerT2">
@@ -557,7 +558,7 @@ p { margin:8px 0; white-space:normal; }
 <p>6.修复了任务剧情在推进到部分阶段时，打开背包界面再关闭，可能导致游戏镜头错误的问题。</p>
 <p>7.修复了在乘坐秘密角游船上岸后，可能会出现无法使用动作或骑行扫帚的问题。</p>
 <p>8.修复了使用魔法胶卷时，无法通过魔法相机拍照的问题。</p></section>
-<section class="hash-block" id="13caf70"><h1 id="toc-69">hash: 13caf70</h1><p>version:306</p>
+<section class="hash-block" id="13caf70"><h1 id="toc-69">Hash: 13caf70</h1><p>version:306</p>
 <p>time:2020-2030</p>
 <div class="smain"><h2 id="toc-70">热门活动</h2></div>
 <div class="bannerT2">
@@ -710,23 +711,34 @@ p { margin:8px 0; white-space:normal; }
   
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  // TOC 展开/收起
-  document.querySelectorAll('.toc .toc-h2').forEach(function(link) {
+  // TOC 展开/收起并滚动
+  document.querySelectorAll('.toc .toc-h1').forEach(function(link) {
     link.addEventListener('click', function(e) {
       var li = link.parentElement;
+      // 展开/收起
       if (li.classList.contains('expanded')) {
         li.classList.remove('expanded');
       } else {
-        // 只展开当前，收起其他
         document.querySelectorAll('.toc li.expanded').forEach(function(other) {
           other.classList.remove('expanded');
         });
         li.classList.add('expanded');
       }
+      // 平滑滚动到对应锚点
+      var targetId = link.getAttribute('href') && link.getAttribute('href').slice(1);
+      if (targetId) {
+        var target = document.getElementById(targetId);
+        if (target) {
+          window.scrollTo({
+            top: target.getBoundingClientRect().top + window.scrollY - 40,
+            behavior: "smooth"
+          });
+        }
+      }
       e.preventDefault();
     });
   });
-  // 滚动时自动展开当前h2
+  // 滚动时自动展开当前h1
   const headings = Array.from(document.querySelectorAll("h1[id],h2[id],h3[id],h4[id]"));
   const tocLinks = Array.from(document.querySelectorAll(".toc a"));
   function onScroll() {
@@ -738,20 +750,28 @@ document.addEventListener("DOMContentLoaded", function() {
     tocLinks.forEach(a => a.classList.remove("active"));
     const active = document.querySelector('.toc a[href="#'+cur.id+'"]');
     if (active) active.classList.add("active");
-    // 自动展开当前h2
-    if (active && active.classList.contains('toc-h2')) {
+    // 自动展开当前h1
+    if (active && active.classList.contains('toc-h1')) {
       document.querySelectorAll('.toc li.expanded').forEach(function(other) {
         other.classList.remove('expanded');
       });
       active.parentElement.classList.add('expanded');
     } else if (active) {
-      // 如果是h3/h4，展开其父h2
       var parentLi = active.closest('ul').parentElement;
-      if (parentLi && parentLi.classList.contains('toc-l2')) {
+      if (parentLi && parentLi.classList.contains('toc-l1')) {
         document.querySelectorAll('.toc li.expanded').forEach(function(other) {
           other.classList.remove('expanded');
         });
         parentLi.classList.add('expanded');
+      }
+    }
+    // === 自动滚动 TOC ===
+    if (active) {
+      var tocNav = document.querySelector('.toc');
+      var rect = active.getBoundingClientRect();
+      var navRect = tocNav.getBoundingClientRect();
+      if (rect.top < navRect.top || rect.bottom > navRect.bottom) {
+        active.scrollIntoView({block: "center", behavior: "smooth"});
       }
     }
   }
