@@ -54,6 +54,7 @@ jobs:
               cat latest_response.txt
               echo ""
             } >> README.md
+            python md2html.py
           else
             echo "Hash unchanged. Skipping update."
             exit 0
