@@ -255,10 +255,11 @@ def build_html(md_text, title="Converted README"):
     css = '''
 body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; line-height:1.6; padding:20px; color:#222; background:#fff; }
 main { max-width: 700px; margin: 0 auto; padding: 0 20px; }
+h1, h2, h3 { text-align: center; }
 h1 { border-bottom:2px solid #ddd; padding-bottom:6px; }
-h2 { color:#2c3e50; margin-top:23px; margin-bottom:5px; }
-h3 { color:#34495e; margin-top:17px; margin-bottom:5px; }
-h4 { color:#4b6584; margin-top:15px; margin-bottom:5px; }
+h2 { color:#2c3e50; margin-top:29px; margin-bottom:5px; }
+h3 { color:#34495e; margin-top:23px; margin-bottom:5px; }
+h4 { color:#4b6584; margin-top:20px; margin-bottom:5px; }
 p { margin:8px 0; white-space:normal; }
 .red { color: #c00; font-weight:600; }
 .bannerT2 { display:flex; gap:12px; margin:12px 0; flex-wrap:wrap; background-color:antiquewhite; padding-top: 10px; padding-bottom:5px; }
