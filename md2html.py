@@ -7,6 +7,7 @@ import re
 import json
 import html
 from pathlib import Path
+import bs4
 
 INPUT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("README.md")
 OUTPUT = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("index.html")
@@ -232,9 +233,6 @@ def split_by_hash_blocks(md_text):
         blocks.append({"hash": h, "body": body})
     return blocks[1:][::-1]
 
-import bs4
-
-# ...existing code...
 
 def build_toc(html_body):
     soup = bs4.BeautifulSoup(html_body, "html.parser")
