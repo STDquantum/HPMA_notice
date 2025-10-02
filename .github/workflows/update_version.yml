@@ -88,3 +88,14 @@ jobs:
             git commit -m "Append data with hash $HASH"
             git push
           fi
+
+  deploy-pages:
+    runs-on: ubuntu-latest
+    needs: update-hash
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
