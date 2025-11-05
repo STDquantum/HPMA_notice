@@ -89,17 +89,3 @@ jobs:
             git push
           fi
           
-  deploy-pages:
-    runs-on: ubuntu-latest
-    needs: update-hash
-    steps:
-      - name: Checkout latest commit
-        uses: actions/checkout@v4
-        with:
-          ref: main  # 确保拿到 update-hash push 后的最新 main 分支版本
-
-      - name: Build and Deploy
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .  # 正确写法！
