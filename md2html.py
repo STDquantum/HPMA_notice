@@ -352,7 +352,7 @@ p { margin:8px 0; white-space:normal; }
 .no-hash { margin:6px 0; }
 .error { color:#900; background:#fee; padding:8px; border-radius:6px; }
 
-@media (max-width:1100px){
+@media (max-width:1000px){
   .toc { display:none !important; }
 }
 '''
